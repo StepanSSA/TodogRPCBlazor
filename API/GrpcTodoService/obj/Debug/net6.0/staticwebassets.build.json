@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "yaFyf7qTabTRUKWm+hEZhcp1177WSq5iWGciemlh+tc=",
+  "Source": "GrpcTodoService",
+  "BasePath": "_content/GrpcTodoService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\stefa\\Desktop\\Тестовое\\TodogRPCBlazor\\Client\\BlazorTodoClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\stefa\\Desktop\\Тестовое\\TodogRPCBlazor\\Client\\BlazorTodoClient\\obj\\Debug\\net6.0\\build-gz\\2kH3BSqX.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\stefa\\Desktop\\Тестовое\\TodogRPCBlazor\\Client\\BlazorTodoClient\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\stefa\\Desktop\\Тестовое\\TodogRPCBlazor\\Client\\BlazorTodoClient\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\stefa\\Desktop\\Тестовое\\TodogRPCBlazor\\Client\\BlazorTodoClient\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.BlazorTodoClient.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.BlazorTodoClient.props",
+      "PackagePath": "build\\BlazorTodoClient.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.BlazorTodoClient.props",
+      "PackagePath": "buildMultiTargeting\\BlazorTodoClient.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.BlazorTodoClient.props",
+      "PackagePath": "buildTransitive\\BlazorTodoClient.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

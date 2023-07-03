@@ -1,0 +1,230 @@
+﻿@page "/"
+@inject Todos.TodosClient Client
+@using BlazorTodoClient.Models;
+@using Google.Protobuf.WellKnownTypes
+@using MudBlazor.Utilities
+
+<MudForm>
+	<MudHidden Invert="@isFormOpen">
+		<MudTextField @bind-Text="@newTodoName" T="string" Label="Название" Required="true" />
+		<MudTextField @bind-Text="@newTodoDesc" T="string" Label="Описание" Required="false" />
+		<br />
+		<MudButton OnClick="AddTodo" Variant="Variant.Filled" Color="Color.Primary">Добавить</MudButton>
+	</MudHidden>
+</MudForm>
+<MudForm>
+	<MudHidden Invert="@isFormSubtaskOpen">
+		<MudTextField @bind-Text="@newSubtaskName" T="string" Label="Название" Required="true" />
+		<br />
+		<MudButton OnClick="AddSubTask" Variant="Variant.Filled" Color="Color.Primary">Добавить</MudButton>
+	</MudHidden>
+</MudForm>
+
+<div class="d-flex flex-column mud-width-full mud-height-full">
+	<MudToolBar Class="gap-4">
+		<MudButton OnClick="() => {isFormOpen = !isFormOpen;}" Variant="Variant.Filled" Color="Color.Primary">Добавить задачу</MudButton>
+		<MudText></MudText>
+	</MudToolBar>
+	
+
+	<MudDropContainer T="DropItem" Items="@_dropzoneItems" @ref="_container" ItemsSelector="@((item,dropzone) => item.Selector == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
+		<ChildContent>
+			@for (int i = 1; i < 3; i++)
+			{
+				var dropzone = i.ToString();
+				<MudPaper Class="ma-4 flex-grow-1">
+					<MudList Clickable="true" Class="d-flex flex-column mud-height-full">
+						@if(dropzone == "1")
+						{
+							<MudListSubheader>Задачи</MudListSubheader>
+						}
+						else
+						{
+							<MudListSubheader>Выполнено</MudListSubheader>
+						}
+						<MudDropZone T="DropItem" Identifier="@dropzone" Class="flex-grow-1" AllowReorder="true" />
+					</MudList>
+				</MudPaper>
+			}
+		</ChildContent>
+		<ItemRenderer>
+				<MudExpansionPanel>
+					<TitleContent>
+						<div class="d-flex">
+							<MudTooltip Text="@context.Description">
+								@if(context.Selector == "1")
+								{
+									<MudSwitch CheckedChanged="(bool value) => UpdateComplited(context,'2'.ToString(),context.Selector)" Checked="@context.Complited" Label="@context.Name" Color="Color.Success" />
+								}
+								else
+								{
+									<MudSwitch CheckedChanged="(bool value) => UpdateComplited(context,'1'.ToString(),context.Selector)" Checked="@context.Complited" Label="@context.Name" Color="Color.Success" />
+								}
+							</MudTooltip>
+							<MudSpacer />
+							<MudFab OnClick="(e) => InitializeCreateSubtask(context.id)" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
+							<MudIconButton OnClick="() => DeleteTodo(context.id)" Icon="@Icons.Material.Filled.Delete"/>
+						</div>
+					</TitleContent>
+					<ChildContent>
+						<MudDatePicker Label="Дата выполнения" @bind-Date="context.CompletionDate" />
+						<MudDatePicker Disabled Label="Дата создания" @bind-Date="context.CreationDate" />
+						@foreach (var item in context.Subtasks)
+						{
+							<MudGrid>
+								<MudItem xs="9" >
+								<MudCheckBox style="max-width: 80%" @bind-Checked="item.Complited" Color="Color.Primary">@item.Name</MudCheckBox>
+								</MudItem>
+								<MudItem xs="3">
+									<MudIconButton OnClick="() => DeleteSubtask(context.id,item.Id)" Icon="@Icons.Material.Filled.Delete" />
+								</MudItem>
+								
+							</MudGrid>
+						}
+					</ChildContent>
+				</MudExpansionPanel>
+		</ItemRenderer>
+	</MudDropContainer>
+</div>
+
+@code {
+	string TextValue = "";
+	bool isOpen = false;
+	bool isFormOpen = true;
+	bool isFormSubtaskOpen = true;
+
+	string newTodoName = "";
+	string newTodoDesc = "";
+	string newSubtaskName = "";
+	string selectedTodoId = "";
+
+	private List<DropItem> _dropzoneItems = new();
+	private MudDropContainer<DropItem> _container;
+	private TodoService todoService;
+
+	private async void AddTodo()
+	{
+		if (String.IsNullOrWhiteSpace(newTodoName))
+			return;
+
+		var newItem = new DropItem()
+			{
+				Complited = false,
+				Description = newTodoDesc,
+				CreationDate = DateTime.UtcNow,
+				Name = newTodoName,
+				Selector = "1",
+				Subtasks = new List<SubtaskMessage>()
+			};
+
+		newItem.id = await todoService.SaveTodo(newTodoName, newTodoDesc);
+
+		_dropzoneItems.Add(newItem);
+
+		isFormOpen = !isFormOpen;
+		newTodoName = "";
+		newTodoDesc = "";
+		RefreshContainer();
+	}
+
+	private async void AddSubTask()
+	{
+		if (String.IsNullOrWhiteSpace(newSubtaskName))
+			return;
+
+		var newItem = new SubtaskMessage()
+			{
+				Complited = false,
+				Name = newSubtaskName
+			};
+		newItem.Id = await todoService.SaveSubtask(newItem, selectedTodoId);
+
+		_dropzoneItems.Where(i => i.id == selectedTodoId).FirstOrDefault()?.Subtasks.Add(newItem);
+
+		selectedTodoId = "";
+		newSubtaskName = "";
+		isFormSubtaskOpen = !isFormSubtaskOpen;
+		RefreshContainer();
+	}
+
+	private void InitializeCreateSubtask(string todoId)
+	{
+		selectedTodoId = todoId;
+		isFormSubtaskOpen = !isFormSubtaskOpen;
+	}
+
+	private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
+	{
+		UpdateComplited(dropItem.Item, dropItem.DropzoneIdentifier, dropItem.Item.Selector);
+	}
+
+	private void RefreshContainer()
+	{
+		StateHasChanged();
+		_container.Refresh();
+	}
+
+	private async void UpdateComplited(DropItem dropItem, string dropzone, string prevDropzone)
+	{
+		if (prevDropzone == dropzone)
+			return;
+
+		if(dropzone == "1")
+		{
+			await todoService.UnsetTodoComplited(dropItem.id);
+			dropItem.Complited = false;
+			dropItem.Subtasks.ForEach(s => s.Complited = false);
+			dropItem.CompletionDate = null;
+			foreach (var item in dropItem.Subtasks)
+			{
+				await todoService.UnsetSubtaskComplited(item.Id);
+			}
+		}
+		else
+		{
+			await todoService.SetTodoComplited(dropItem.id);
+			dropItem.Complited = true;
+			dropItem.Subtasks.ForEach(s => s.Complited = true);
+			dropItem.CompletionDate = DateTime.UtcNow;
+			foreach (var item in dropItem.Subtasks)
+			{
+				await todoService.SetSubtaskComplited(item.Id);
+			}
+		}
+
+		dropItem.Selector = dropzone;
+		RefreshContainer();
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		todoService = new TodoService(Client);
+		_dropzoneItems = await todoService.LoadData();
+		RefreshContainer();
+	}
+
+	public async void DeleteTodo(string id)
+	{
+		var result = await todoService.DeleteTodo(id);
+		if (result)
+		{
+			var item = _dropzoneItems.Where(i => i.id == id).FirstOrDefault();
+			if(item != null)
+				_dropzoneItems.Remove(item);
+		}
+		RefreshContainer();
+	}
+	public async void DeleteSubtask(string todoId, string subtaskId)
+	{
+		var result = await todoService.DeleteSubtask(todoId, subtaskId);
+		if (result)
+		{
+			var todo = _dropzoneItems.Where(i => i.id == todoId).FirstOrDefault();
+			var item = todo?.Subtasks.Where(s => s.Id == subtaskId).FirstOrDefault();
+			if (item != null)
+				todo?.Subtasks.Remove(item);
+		}
+		RefreshContainer();
+	}
+
+}

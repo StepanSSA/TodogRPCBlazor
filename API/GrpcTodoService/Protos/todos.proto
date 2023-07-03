@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GrpcTodoService";
+
+package todos;
+
+service Todos {
+  rpc GetTodos (GetTodosRequest) returns (GetTodosReply);
+  rpc AddTodo (AddTodoRequest) returns (AddTodoReply);
+  rpc DeleteTodo (DeleteTodoRequest) returns (ComplitedReply);
+  rpc SetTodoComplited (SetTodoComplitedRequest) returns (ComplitedReply);
+  rpc UnsetTodoComplited (UnsetTodoComplitedRequest) returns (ComplitedReply);
+  rpc SetSubtaskComplited (SetSubtaskComplitedRequest) returns (ComplitedReply);
+  rpc UnsetSubtaskComplited (UnsetSubtaskComplitedRequest) returns (ComplitedReply);
+  rpc AddSubtask (AddSubtaskRequest) returns (AddSubtaskReply);
+  rpc DeleteSubtask (DeleteSubtaskRequest) returns (ComplitedReply);
+}
+message ComplitedReply{
+    bool Complited = 1;
+}
+
+message GetTodosRequest { }
+
+message GetTodosReply {
+	repeated TodosMessage Todos = 1;
+}
+
+message TodosMessage{
+    string Id = 1;
+    string Name = 2;
+    google.protobuf.Timestamp CreationDate = 3;
+    google.protobuf.Timestamp CompletionDate = 4;
+    bool Complited = 5;
+    string Description = 6;
+    repeated SubtaskMessage Subtasks = 7;
+}
+
+message SubtaskMessage {
+    string Id = 1;
+    string Name = 2;
+    bool Complited = 3;
+}
+
+message AddTodoRequest{
+    string Name = 2;
+    string Description = 3;
+}
+
+message AddTodoReply{
+    string Id = 1;
+}
+
+message DeleteTodoRequest{
+    string Id = 1;
+}
+
+message SetTodoComplitedRequest{
+    string Id = 1;
+}
+
+message UnsetTodoComplitedRequest{
+    string Id = 1;
+}
+
+message SetSubtaskComplitedRequest{
+    string Id = 1;
+}
+
+message UnsetSubtaskComplitedRequest{
+    string Id = 1;
+}
+
+message AddSubtaskRequest{
+    string Name = 1;
+    bool Complited = 2;
+    string TodoId = 3;
+}
+message AddSubtaskReply{
+    string Id = 1;
+}
+
+message DeleteSubtaskRequest{
+    string Id = 1;
+}
