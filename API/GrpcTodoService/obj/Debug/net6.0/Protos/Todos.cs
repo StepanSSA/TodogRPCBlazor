@@ -25,44 +25,44 @@ namespace GrpcTodoService {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChJQcm90b3MvdG9kb3MucHJvdG8SBXRvZG9zGh9nb29nbGUvcHJvdG9idWYv",
-            "dGltZXN0YW1wLnByb3RvIiMKDkNvbXBsaXRlZFJlcGx5EhEKCUNvbXBsaXRl",
-            "ZBgBIAEoCCIRCg9HZXRUb2Rvc1JlcXVlc3QiMwoNR2V0VG9kb3NSZXBseRIi",
-            "CgVUb2RvcxgBIAMoCzITLnRvZG9zLlRvZG9zTWVzc2FnZSLfAQoMVG9kb3NN",
-            "ZXNzYWdlEgoKAklkGAEgASgJEgwKBE5hbWUYAiABKAkSMAoMQ3JlYXRpb25E",
-            "YXRlGAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIyCg5Db21w",
-            "bGV0aW9uRGF0ZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAS",
-            "EQoJQ29tcGxpdGVkGAUgASgIEhMKC0Rlc2NyaXB0aW9uGAYgASgJEicKCFN1",
-            "YnRhc2tzGAcgAygLMhUudG9kb3MuU3VidGFza01lc3NhZ2UiPQoOU3VidGFz",
-            "a01lc3NhZ2USCgoCSWQYASABKAkSDAoETmFtZRgCIAEoCRIRCglDb21wbGl0",
-            "ZWQYAyABKAgiMwoOQWRkVG9kb1JlcXVlc3QSDAoETmFtZRgCIAEoCRITCgtE",
-            "ZXNjcmlwdGlvbhgDIAEoCSIaCgxBZGRUb2RvUmVwbHkSCgoCSWQYASABKAki",
-            "HwoRRGVsZXRlVG9kb1JlcXVlc3QSCgoCSWQYASABKAkiJQoXU2V0VG9kb0Nv",
-            "bXBsaXRlZFJlcXVlc3QSCgoCSWQYASABKAkiJwoZVW5zZXRUb2RvQ29tcGxp",
-            "dGVkUmVxdWVzdBIKCgJJZBgBIAEoCSIoChpTZXRTdWJ0YXNrQ29tcGxpdGVk",
-            "UmVxdWVzdBIKCgJJZBgBIAEoCSIqChxVbnNldFN1YnRhc2tDb21wbGl0ZWRS",
-            "ZXF1ZXN0EgoKAklkGAEgASgJIkQKEUFkZFN1YnRhc2tSZXF1ZXN0EgwKBE5h",
-            "bWUYASABKAkSEQoJQ29tcGxpdGVkGAIgASgIEg4KBlRvZG9JZBgDIAEoCSId",
-            "Cg9BZGRTdWJ0YXNrUmVwbHkSCgoCSWQYASABKAkiIgoURGVsZXRlU3VidGFz",
-            "a1JlcXVlc3QSCgoCSWQYASABKAky/AQKBVRvZG9zEjgKCEdldFRvZG9zEhYu",
-            "dG9kb3MuR2V0VG9kb3NSZXF1ZXN0GhQudG9kb3MuR2V0VG9kb3NSZXBseRI1",
-            "CgdBZGRUb2RvEhUudG9kb3MuQWRkVG9kb1JlcXVlc3QaEy50b2Rvcy5BZGRU",
-            "b2RvUmVwbHkSPQoKRGVsZXRlVG9kbxIYLnRvZG9zLkRlbGV0ZVRvZG9SZXF1",
-            "ZXN0GhUudG9kb3MuQ29tcGxpdGVkUmVwbHkSSQoQU2V0VG9kb0NvbXBsaXRl",
-            "ZBIeLnRvZG9zLlNldFRvZG9Db21wbGl0ZWRSZXF1ZXN0GhUudG9kb3MuQ29t",
-            "cGxpdGVkUmVwbHkSTQoSVW5zZXRUb2RvQ29tcGxpdGVkEiAudG9kb3MuVW5z",
-            "ZXRUb2RvQ29tcGxpdGVkUmVxdWVzdBoVLnRvZG9zLkNvbXBsaXRlZFJlcGx5",
-            "Ek8KE1NldFN1YnRhc2tDb21wbGl0ZWQSIS50b2Rvcy5TZXRTdWJ0YXNrQ29t",
-            "cGxpdGVkUmVxdWVzdBoVLnRvZG9zLkNvbXBsaXRlZFJlcGx5ElMKFVVuc2V0",
-            "U3VidGFza0NvbXBsaXRlZBIjLnRvZG9zLlVuc2V0U3VidGFza0NvbXBsaXRl",
-            "ZFJlcXVlc3QaFS50b2Rvcy5Db21wbGl0ZWRSZXBseRI+CgpBZGRTdWJ0YXNr",
-            "EhgudG9kb3MuQWRkU3VidGFza1JlcXVlc3QaFi50b2Rvcy5BZGRTdWJ0YXNr",
-            "UmVwbHkSQwoNRGVsZXRlU3VidGFzaxIbLnRvZG9zLkRlbGV0ZVN1YnRhc2tS",
-            "ZXF1ZXN0GhUudG9kb3MuQ29tcGxpdGVkUmVwbHlCEqoCD0dycGNUb2RvU2Vy",
-            "dmljZWIGcHJvdG8z"));
+            "dGltZXN0YW1wLnByb3RvIjQKDkNvbXBsaXRlZFJlcGx5EhEKCUNvbXBsaXRl",
+            "ZBgBIAEoCBIPCgdtZXNzYWdlGAIgASgJIhEKD0dldFRvZG9zUmVxdWVzdCIz",
+            "Cg1HZXRUb2Rvc1JlcGx5EiIKBVRvZG9zGAEgAygLMhMudG9kb3MuVG9kb3NN",
+            "ZXNzYWdlIt8BCgxUb2Rvc01lc3NhZ2USCgoCSWQYASABKAkSDAoETmFtZRgC",
+            "IAEoCRIwCgxDcmVhdGlvbkRhdGUYAyABKAsyGi5nb29nbGUucHJvdG9idWYu",
+            "VGltZXN0YW1wEjIKDkNvbXBsZXRpb25EYXRlGAQgASgLMhouZ29vZ2xlLnBy",
+            "b3RvYnVmLlRpbWVzdGFtcBIRCglDb21wbGl0ZWQYBSABKAgSEwoLRGVzY3Jp",
+            "cHRpb24YBiABKAkSJwoIU3VidGFza3MYByADKAsyFS50b2Rvcy5TdWJ0YXNr",
+            "TWVzc2FnZSI9Cg5TdWJ0YXNrTWVzc2FnZRIKCgJJZBgBIAEoCRIMCgROYW1l",
+            "GAIgASgJEhEKCUNvbXBsaXRlZBgDIAEoCCIzCg5BZGRUb2RvUmVxdWVzdBIM",
+            "CgROYW1lGAIgASgJEhMKC0Rlc2NyaXB0aW9uGAMgASgJIhoKDEFkZFRvZG9S",
+            "ZXBseRIKCgJJZBgBIAEoCSIfChFEZWxldGVUb2RvUmVxdWVzdBIKCgJJZBgB",
+            "IAEoCSIlChdTZXRUb2RvQ29tcGxpdGVkUmVxdWVzdBIKCgJJZBgBIAEoCSIn",
+            "ChlVbnNldFRvZG9Db21wbGl0ZWRSZXF1ZXN0EgoKAklkGAEgASgJIigKGlNl",
+            "dFN1YnRhc2tDb21wbGl0ZWRSZXF1ZXN0EgoKAklkGAEgASgJIioKHFVuc2V0",
+            "U3VidGFza0NvbXBsaXRlZFJlcXVlc3QSCgoCSWQYASABKAkiRAoRQWRkU3Vi",
+            "dGFza1JlcXVlc3QSDAoETmFtZRgBIAEoCRIRCglDb21wbGl0ZWQYAiABKAgS",
+            "DgoGVG9kb0lkGAMgASgJIh0KD0FkZFN1YnRhc2tSZXBseRIKCgJJZBgBIAEo",
+            "CSIiChREZWxldGVTdWJ0YXNrUmVxdWVzdBIKCgJJZBgBIAEoCTL8BAoFVG9k",
+            "b3MSOAoIR2V0VG9kb3MSFi50b2Rvcy5HZXRUb2Rvc1JlcXVlc3QaFC50b2Rv",
+            "cy5HZXRUb2Rvc1JlcGx5EjUKB0FkZFRvZG8SFS50b2Rvcy5BZGRUb2RvUmVx",
+            "dWVzdBoTLnRvZG9zLkFkZFRvZG9SZXBseRI9CgpEZWxldGVUb2RvEhgudG9k",
+            "b3MuRGVsZXRlVG9kb1JlcXVlc3QaFS50b2Rvcy5Db21wbGl0ZWRSZXBseRJJ",
+            "ChBTZXRUb2RvQ29tcGxpdGVkEh4udG9kb3MuU2V0VG9kb0NvbXBsaXRlZFJl",
+            "cXVlc3QaFS50b2Rvcy5Db21wbGl0ZWRSZXBseRJNChJVbnNldFRvZG9Db21w",
+            "bGl0ZWQSIC50b2Rvcy5VbnNldFRvZG9Db21wbGl0ZWRSZXF1ZXN0GhUudG9k",
+            "b3MuQ29tcGxpdGVkUmVwbHkSTwoTU2V0U3VidGFza0NvbXBsaXRlZBIhLnRv",
+            "ZG9zLlNldFN1YnRhc2tDb21wbGl0ZWRSZXF1ZXN0GhUudG9kb3MuQ29tcGxp",
+            "dGVkUmVwbHkSUwoVVW5zZXRTdWJ0YXNrQ29tcGxpdGVkEiMudG9kb3MuVW5z",
+            "ZXRTdWJ0YXNrQ29tcGxpdGVkUmVxdWVzdBoVLnRvZG9zLkNvbXBsaXRlZFJl",
+            "cGx5Ej4KCkFkZFN1YnRhc2sSGC50b2Rvcy5BZGRTdWJ0YXNrUmVxdWVzdBoW",
+            "LnRvZG9zLkFkZFN1YnRhc2tSZXBseRJDCg1EZWxldGVTdWJ0YXNrEhsudG9k",
+            "b3MuRGVsZXRlU3VidGFza1JlcXVlc3QaFS50b2Rvcy5Db21wbGl0ZWRSZXBs",
+            "eUISqgIPR3JwY1RvZG9TZXJ2aWNlYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcTodoService.ComplitedReply), global::GrpcTodoService.ComplitedReply.Parser, new[]{ "Complited" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcTodoService.ComplitedReply), global::GrpcTodoService.ComplitedReply.Parser, new[]{ "Complited", "Message" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GrpcTodoService.GetTodosRequest), global::GrpcTodoService.GetTodosRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GrpcTodoService.GetTodosReply), global::GrpcTodoService.GetTodosReply.Parser, new[]{ "Todos" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GrpcTodoService.TodosMessage), global::GrpcTodoService.TodosMessage.Parser, new[]{ "Id", "Name", "CreationDate", "CompletionDate", "Complited", "Description", "Subtasks" }, null, null, null, null),
@@ -113,6 +113,7 @@ namespace GrpcTodoService {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ComplitedReply(ComplitedReply other) : this() {
       complited_ = other.complited_;
+      message_ = other.message_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -132,6 +133,17 @@ namespace GrpcTodoService {
       }
     }
 
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 2;
+    private string message_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Message {
+      get { return message_; }
+      set {
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ComplitedReply);
@@ -146,6 +158,7 @@ namespace GrpcTodoService {
         return true;
       }
       if (Complited != other.Complited) return false;
+      if (Message != other.Message) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -153,6 +166,7 @@ namespace GrpcTodoService {
     public override int GetHashCode() {
       int hash = 1;
       if (Complited != false) hash ^= Complited.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -173,6 +187,10 @@ namespace GrpcTodoService {
         output.WriteRawTag(8);
         output.WriteBool(Complited);
       }
+      if (Message.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Message);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -186,6 +204,10 @@ namespace GrpcTodoService {
         output.WriteRawTag(8);
         output.WriteBool(Complited);
       }
+      if (Message.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Message);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -197,6 +219,9 @@ namespace GrpcTodoService {
       int size = 0;
       if (Complited != false) {
         size += 1 + 1;
+      }
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -211,6 +236,9 @@ namespace GrpcTodoService {
       }
       if (other.Complited != false) {
         Complited = other.Complited;
+      }
+      if (other.Message.Length != 0) {
+        Message = other.Message;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -230,6 +258,10 @@ namespace GrpcTodoService {
             Complited = input.ReadBool();
             break;
           }
+          case 18: {
+            Message = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -246,6 +278,10 @@ namespace GrpcTodoService {
             break;
           case 8: {
             Complited = input.ReadBool();
+            break;
+          }
+          case 18: {
+            Message = input.ReadString();
             break;
           }
         }

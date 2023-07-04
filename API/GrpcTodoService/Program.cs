@@ -1,9 +1,13 @@
 using GrpcTodoService.Services;
 using Data;
+using GrpcTodoService.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddGrpc();
+builder.Services.AddGrpc(opt =>
+{
+    opt.Interceptors.Add<ExeptionInterceptor>();
+});
 builder.Services.AddData();
 builder.Services.AddCors(opt =>
 {

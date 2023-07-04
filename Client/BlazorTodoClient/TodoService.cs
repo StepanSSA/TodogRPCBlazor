@@ -1,4 +1,6 @@
 ﻿using BlazorTodoClient.Models;
+using BlazorTodoClient.Pages;
+using Grpc.Core;
 using static BlazorTodoClient.Pages.Todo;
 
 namespace BlazorTodoClient
@@ -14,7 +16,16 @@ namespace BlazorTodoClient
 
 		public async Task<List<DropItem>> LoadData()
 		{
-			var result = await _client.GetTodosAsync(new GetTodosRequest() { });
+			var result = new GetTodosReply();
+			try
+			{
+				result = await _client.GetTodosAsync(new GetTodosRequest() { });
+			}
+			catch (RpcException ex)
+			{
+				throw ex;
+			}
+
 			var tasks = new List<DropItem>();
 			var index = 0;
 			foreach (var item in result.Todos)
@@ -47,59 +58,132 @@ namespace BlazorTodoClient
 
 		public async Task<string> SaveTodo(string name, string description)
 		{
-			var result = await _client.AddTodoAsync(new AddTodoRequest()
+			var result = new AddTodoReply();
+			try
 			{
-				Description = description,
-				Name = name
-			});
+				result = await _client.AddTodoAsync(new AddTodoRequest()
+				{
+					Description = description,
+					Name = name
+				});
+			}
+			catch (RpcException ex)
+			{
+				throw ex;
+			}
 
 			return result.Id;
 		}
 
 		public async Task<string> SaveSubtask(SubtaskMessage subtask, string todoId)
 		{
-			var result = await _client.AddSubtaskAsync(new AddSubtaskRequest()
+			var result = new AddSubtaskReply();
+			try
 			{
-				Complited = subtask.Complited,
-				Name = subtask.Name,
-				TodoId = todoId
-			});
+				result = await _client.AddSubtaskAsync(new AddSubtaskRequest()
+				{
+					Complited = subtask.Complited,
+					Name = subtask.Name,
+					TodoId = todoId
+				});
+			}
+			catch (RpcException ex)
+			{
+				
+				throw ex;
+			}
+			
+
 			return result.Id;
 		}
 
-		public async Task<bool> DeleteTodo(string id)
+		public async Task<ComplitedReply> DeleteTodo(string id)
 		{
-			var result = await _client.DeleteTodoAsync(new DeleteTodoRequest() { Id = id });
-			return result.Complited;
+			var result = new ComplitedReply();
+			try
+			{
+				result = await _client.DeleteTodoAsync(new DeleteTodoRequest() { Id = id });
+			}
+			catch (RpcException ex)
+			{
+				throw ex;
+			}
+			
+			return result;
 		}
-		public async Task<bool> DeleteSubtask(string todoId, string subtaskId)
+		public async Task<ComplitedReply> DeleteSubtask(string todoId, string subtaskId)
 		{
-			var result = await _client.DeleteSubtaskAsync(new DeleteSubtaskRequest() { Id = subtaskId });
-			return result.Complited;
+			var result = new ComplitedReply();
+			try
+			{
+				result = await _client.DeleteSubtaskAsync(new DeleteSubtaskRequest() { Id = subtaskId });
+			}
+			catch (RpcException ex)
+			{
+				throw ex;
+			}
+			
+			return result;
 		}
 
-		public async Task<bool> SetSubtaskComplited(string subtaskId)
+		public async Task<ComplitedReply> SetSubtaskComplited(string subtaskId)
 		{
-			var result = await _client.SetSubtaskComplitedAsync(new SetSubtaskComplitedRequest() { Id = subtaskId });
-			return result.Complited;
+			var result = new ComplitedReply();
+			try
+			{
+				result = await _client.SetSubtaskComplitedAsync(new SetSubtaskComplitedRequest() { Id = subtaskId });
+			}
+			catch (RpcException ex)
+			{
+				throw ex;
+			}
+			
+			return result;
 		}
 
-		public async Task<bool> UnsetSubtaskComplited(string subtaskId)
+		public async Task<ComplitedReply> UnsetSubtaskComplited(string subtaskId)
 		{
-			var result = await _client.UnsetSubtaskComplitedAsync(new UnsetSubtaskComplitedRequest() { Id = subtaskId });
-			return result.Complited;
+			var result = new ComplitedReply();
+			try
+			{
+				result = await _client.UnsetSubtaskComplitedAsync(new UnsetSubtaskComplitedRequest() { Id = subtaskId });
+			}
+			catch (RpcException ex)
+			{
+				throw ex;
+			}
+
+			return result;
 		}
 
-		public async Task<bool> SetTodoComplited(string todoId)
+		public async Task<ComplitedReply> SetTodoComplited(string todoId)
 		{
-			var result = await _client.SetTodoComplitedAsync(new SetTodoComplitedRequest() { Id = todoId });
-			return result.Complited;
+			var result = new ComplitedReply();
+			try
+			{
+				result = await _client.SetTodoComplitedAsync(new SetTodoComplitedRequest() { Id = todoId });
+			}
+			catch (RpcException ex)
+			{
+				throw ex;
+			}
+			
+			return result;
 		}
 
-		public async Task<bool> UnsetTodoComplited(string todoId)
+		public async Task<ComplitedReply> UnsetTodoComplited(string todoId)
 		{
-			var result = await _client.UnsetTodoComplitedAsync(new UnsetTodoComplitedRequest() { Id = todoId });
-			return result.Complited;
+			var result = new ComplitedReply();
+			try
+			{
+				result = await _client.UnsetTodoComplitedAsync(new UnsetTodoComplitedRequest() { Id = todoId });
+			}
+			catch (RpcException ex)
+			{
+				throw ex;
+			}
+
+			return result;
 		}
 	}
 }

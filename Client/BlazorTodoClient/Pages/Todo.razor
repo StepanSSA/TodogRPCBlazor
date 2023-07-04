@@ -206,25 +206,28 @@
 	public async void DeleteTodo(string id)
 	{
 		var result = await todoService.DeleteTodo(id);
-		if (result)
+		if (result.Complited)
 		{
 			var item = _dropzoneItems.Where(i => i.id == id).FirstOrDefault();
 			if(item != null)
+			{
 				_dropzoneItems.Remove(item);
+				RefreshContainer();
+			}	
 		}
-		RefreshContainer();
 	}
 	public async void DeleteSubtask(string todoId, string subtaskId)
 	{
 		var result = await todoService.DeleteSubtask(todoId, subtaskId);
-		if (result)
+		if (result.Complited)
 		{
 			var todo = _dropzoneItems.Where(i => i.id == todoId).FirstOrDefault();
 			var item = todo?.Subtasks.Where(s => s.Id == subtaskId).FirstOrDefault();
 			if (item != null)
+			{
 				todo?.Subtasks.Remove(item);
+				RefreshContainer();
+			}
 		}
-		RefreshContainer();
 	}
-
 }

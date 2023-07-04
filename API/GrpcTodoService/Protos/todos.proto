@@ -19,6 +19,7 @@ service Todos {
 }
 message ComplitedReply{
     bool Complited = 1;
+    string message = 2;
 }
 
 message GetTodosRequest { }
