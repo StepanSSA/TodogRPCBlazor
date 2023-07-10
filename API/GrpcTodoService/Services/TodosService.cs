@@ -86,38 +86,35 @@ namespace GrpcTodoService.Services
         {
             var data = await _repository.GetAllAsync();
             var reply = new GetTodosReply();
-            var subtaskReply = new List<SubtaskMessage>();
-            var index = 0;
             var date = new Timestamp();
 
-			foreach (var item in data) 
+            for (int i = 0; i < data.Count; i++)
             {
-                foreach (var subtask in item.Subtasks)
-                {
-                    subtaskReply.Add(new SubtaskMessage()
-                    {
-                        Complited = subtask.Complited,
-                        Id = subtask.Id.ToString(),
-                        Name = subtask.Name,
-                    });
-                }
+				var subtaskReply = new List<SubtaskMessage>();
+				foreach (var subtask in data[i].Subtasks)
+				{
+					subtaskReply.Add(new SubtaskMessage()
+					{
+						Complited = subtask.Complited,
+						Id = subtask.Id.ToString(),
+						Name = subtask.Name,
+					});
+				}
 
-                if (item.СompletionDate.Date != new DateTime(0001, 01, 01))
-                    date = Timestamp.FromDateTime(item.СompletionDate);
+				if (data[i].СompletionDate.Date != new DateTime(0001, 01, 01))
+					date = Timestamp.FromDateTime(data[i].СompletionDate);
 
 				reply.Todos.Add(new TodosMessage()
-                {
-                    Id = item.Id.ToString(),
-                    Complited = item.Complited,
-                    Description = item.Description,
-                    Name = item.Name,
-                    CompletionDate = date,
-                    CreationDate = Timestamp.FromDateTime(item.CreationDate),
-                });
-                reply.Todos[index].Subtasks.AddRange(subtaskReply);
-
-                index++;
-            }
+				{
+					Id = data[i].Id.ToString(),
+					Complited = data[i].Complited,
+					Description = data[i].Description,
+					Name = data[i].Name,
+					CompletionDate = date,
+					CreationDate = Timestamp.FromDateTime(data[i].CreationDate),
+				});
+				reply.Todos[i].Subtasks.AddRange(subtaskReply);
+			}
 
             return reply;
         }
